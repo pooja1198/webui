@@ -1,104 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaada AI Platform - Sustainable AI Solutions</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Fixed Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-left">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Avaada_Energy_Logo.png" alt="Avaada Energy Logo" class="logo">
-                <h1 class="nav-title">Avaada AI Platform</h1>
-            </div>
-            <div class="nav-right">
-                <button class="nav-btn nav-btn--active">Chat</button>
-                <button class="nav-btn nav-btn--disabled" disabled>Docs</button>
-                <button class="nav-btn nav-btn--disabled" disabled>Admin</button>
-            </div>
-            <!-- Mobile hamburger menu -->
-            <button class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avaada AI Platform</title>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h2 class="hero-title">Promise of a Sustainable Future, Powered by AI</h2>
-            <p class="hero-subtitle">Harness the power of large language models with Avaada's commitment to sustainability and innovation</p>
-            <button class="hero-btn" id="startChatBtn">Start Chat</button>
-        </div>
-    </section>
+    <!-- Lato Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Main Content Area -->
-    <main class="main-content">
+    <!-- Feather Icons -->
+    <script
+      defer
+      src="https://unpkg.com/feather-icons@4.29.1/dist/feather.min.js"
+    ></script>
+
+    <!-- Chart.js (for Analytics section) -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+    ></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Global Header -->
+      <header class="app-header flex items-center justify-between px-16 py-8">
+        <div class="flex items-center gap-16">
+          <button
+            id="mobileMenuBtn"
+            class="mobile-menu-btn btn btn--outline btn--sm hidden"
+            aria-label="Toggle navigation"
+          >
+            <i data-feather="menu"></i>
+          </button>
+          <div class="flex items-center gap-8 brand-group">
+            <div class="logo-icon" aria-hidden="true">A</div>
+            <div class="flex flex-col">
+              <span class="brand-name">Avaada AI</span>
+              <span class="brand-tagline text-sm"
+                >Promise of a Sustainable Future</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 header-right"></div>
+      </header>
+
+      <!-- Main Layout -->
+      <div class="layout flex">
         <!-- Left Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <nav class="sidebar-nav">
-                <ul class="sidebar-menu">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link sidebar-link--active">
-                            <span class="sidebar-icon">🏠</span>
-                            Overview
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <span class="sidebar-icon">📚</span>
-                            Knowledge Collections
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <span class="sidebar-icon">🔧</span>
-                            Model Builder
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <span class="sidebar-icon">⚙️</span>
-                            Settings
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <aside
+          id="leftSidebar"
+          class="sidebar sidebar--left flex flex-col"
+          aria-label="Primary"
+        >
+          <nav class="nav flex-1" aria-label="Main Navigation">
+            <ul id="navMenu" class="nav-menu"></ul>
+          </nav>
+
+          <!-- Recent Chats -->
+          <section class="recent-chats">
+            <h3 class="sidebar-section-title">Recent Chats</h3>
+            <ul id="chatHistoryList" class="chat-history-list"></ul>
+          </section>
+
+          <!-- User Profile -->
+          <section class="user-profile flex items-center gap-8 px-16 py-16">
+            <img
+              id="userAvatar"
+              class="avatar"
+              src="/api/placeholder/40/40"
+              alt="User avatar"
+              width="40"
+              height="40"
+            />
+            <div class="flex flex-col flex-1">
+              <span id="userName" class="user-name"></span>
+              <span id="userRole" class="text-xs user-role"></span>
+            </div>
+            <div class="profile-actions flex flex-col gap-4">
+              <button
+                id="profileBtn"
+                class="btn btn--secondary btn--sm"
+                aria-label="Profile"
+              >
+                <i data-feather="user"></i>
+              </button>
+              <button
+                id="logoutBtn"
+                class="btn btn--secondary btn--sm"
+                aria-label="Logout"
+              >
+                <i data-feather="log-out"></i>
+              </button>
+            </div>
+          </section>
         </aside>
 
-        <!-- Right Content Area with iframe -->
-        <section class="content-area">
-            <div class="iframe-container">
-                <iframe 
-                    id="webuiFrame" 
-                    src="/webui" 
-                    title="Open WebUI"
-                    class="webui-iframe"
-                    frameborder="0">
-                </iframe>
-                <!-- Fallback message if iframe fails to load -->
-                <div class="iframe-fallback" id="fallbackMessage">
-                    <div class="fallback-content">
-                        <h3>Open WebUI Service Offline</h3>
-                        <p>Please start the Open WebUI container to access the chat interface.</p>
-                        <p>Expected service URL: <code>/webui</code></p>
-                    </div>
+        <!-- Main Area (dynamic views) -->
+        <main class="main flex flex-col" id="mainArea">
+          <!-- Common Header inside Main Area -->
+          <div
+            class="main-view-header flex justify-between items-center px-16 py-16"
+            id="mainViewHeader"
+          ></div>
+
+          <!-- Views Container -->
+          <div class="views flex-1 overflow-hidden" id="viewsContainer">
+            <!-- Dashboard / Chat View -->
+            <div id="chatView" class="view flex flex-col h-full">
+              <section
+                id="messagesArea"
+                class="messages-area flex-1 px-16 py-16"
+                aria-live="polite"
+              ></section>
+              <div
+                id="typingIndicator"
+                class="typing-indicator hidden px-16 py-8"
+              >
+                <span class="dot"></span><span class="dot"></span
+                ><span class="dot"></span>
+              </div>
+              <form
+                id="chatForm"
+                class="chat-input-form px-16 py-16 flex flex-col gap-8"
+                autocomplete="off"
+              >
+                <textarea
+                  id="chatInput"
+                  class="form-control chat-input"
+                  rows="2"
+                  placeholder="Type your message..."
+                  maxlength="2000"
+                  aria-label="Message input"
+                  required
+                ></textarea>
+                <div class="flex justify-between items-center">
+                  <span id="charCounter" class="text-xs text-secondary"
+                    >0 / 2000</span
+                  >
+                  <button
+                    type="submit"
+                    id="sendBtn"
+                    class="btn btn--primary"
+                    aria-label="Send message"
+                  >
+                    Send <i data-feather="send"></i>
+                  </button>
                 </div>
+              </form>
             </div>
-        </section>
-    </main>
 
-    <!-- Mobile Sidebar Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+            <!-- Projects View -->
+            <div id="projectsView" class="view hidden flex flex-col h-full px-16 py-16 overflow-auto">
+              <h2>Projects</h2>
+              <div id="projectsCenterList" class="flex flex-col gap-8 mt-16"></div>
+            </div>
 
-    <script src="app.js"></script>
-</body>
+            <!-- Teams View -->
+            <div id="teamsView" class="view hidden flex flex-col h-full px-16 py-16 overflow-auto">
+              <h2>Teams</h2>
+              <p class="mt-16">Total team members: <span id="teamCount"></span></p>
+            </div>
+
+            <!-- Analytics View -->
+            <div id="analyticsView" class="view hidden flex flex-col h-full px-16 py-16 overflow-auto">
+              <h2>Analytics</h2>
+              <canvas id="analyticsChart" height="300"></canvas>
+            </div>
+
+            <!-- Chat History View (central) -->
+            <div id="chatHistoryView" class="view hidden flex flex-col h-full px-16 py-16 overflow-auto">
+              <h2>All Chat History</h2>
+              <ul id="chatHistoryCenterList" class="chat-history-list mt-16"></ul>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settingsView" class="view hidden flex flex-col h-full px-16 py-16 overflow-auto">
+              <h2>Settings</h2>
+              <form class="mt-16 flex flex-col gap-8" id="settingsForm">
+                <label class="flex items-center gap-8">
+                  <input type="checkbox" id="darkModeToggle" /> Dark mode
+                </label>
+                <label class="flex items-center gap-8">
+                  <input type="checkbox" id="notificationsToggle" checked />
+                  Enable notifications
+                </label>
+              </form>
+            </div>
+          </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside
+          id="rightSidebar"
+          class="sidebar sidebar--right flex flex-col"
+          aria-label="Secondary"
+        >
+          <!-- Active Projects -->
+          <section class="projects-section px-16 py-16 flex-1 overflow-auto">
+            <div class="flex justify-between items-center mb-8">
+              <h3>Your Active Projects</h3>
+              <button id="addProjectBtn" class="btn btn--outline btn--sm">Add</button>
+            </div>
+            <div id="projectsList" class="projects-list flex flex-col gap-8"></div>
+            <a href="#" class="view-all mt-8" target="_blank">View all projects</a>
+          </section>
+
+          <!-- Quick Actions -->
+          <section class="quick-actions px-16 py-16">
+            <h3 class="mb-8">Quick Actions</h3>
+            <div id="quickActionsGrid" class="actions-grid grid gap-8"></div>
+          </section>
+
+          <!-- Recent Activity -->
+          <section class="recent-activity px-16 py-16">
+            <h3 class="mb-8">Recent Activity</h3>
+            <ul id="activityFeed" class="activity-feed"></ul>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
 </html>
