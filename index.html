@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaada AI Platform - Sustainable AI Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Avaada_Energy_Logo.png" alt="Avaada Energy Logo" class="logo">
+                <h1 class="nav-title">Avaada AI Platform</h1>
+            </div>
+            <div class="nav-right">
+                <button class="nav-btn nav-btn--active">Chat</button>
+                <button class="nav-btn nav-btn--disabled" disabled>Docs</button>
+                <button class="nav-btn nav-btn--disabled" disabled>Admin</button>
+            </div>
+            <!-- Mobile hamburger menu -->
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">Promise of a Sustainable Future, Powered by AI</h2>
+            <p class="hero-subtitle">Harness the power of large language models with Avaada's commitment to sustainability and innovation</p>
+            <button class="hero-btn" id="startChatBtn">Start Chat</button>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Left Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link sidebar-link--active">
+                            <span class="sidebar-icon">🏠</span>
+                            Overview
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <span class="sidebar-icon">📚</span>
+                            Knowledge Collections
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <span class="sidebar-icon">🔧</span>
+                            Model Builder
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <span class="sidebar-icon">⚙️</span>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Right Content Area with iframe -->
+        <section class="content-area">
+            <div class="iframe-container">
+                <iframe 
+                    id="webuiFrame" 
+                    src="/webui" 
+                    title="Open WebUI"
+                    class="webui-iframe"
+                    frameborder="0">
+                </iframe>
+                <!-- Fallback message if iframe fails to load -->
+                <div class="iframe-fallback" id="fallbackMessage">
+                    <div class="fallback-content">
+                        <h3>Open WebUI Service Offline</h3>
+                        <p>Please start the Open WebUI container to access the chat interface.</p>
+                        <p>Expected service URL: <code>/webui</code></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
